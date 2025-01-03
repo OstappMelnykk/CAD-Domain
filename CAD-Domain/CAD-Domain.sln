@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CAD.Domain", "CAD.Domain\CAD.Domain.csproj", "{0176389B-6A22-4053-8211-0C26FCA68A0F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CAD.ConsoleApplication", "CAD.ConsoleApplication\CAD.ConsoleApplication.csproj", "{5B41481C-77A5-46B5-A979-C9707752BA01}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0176389B-6A22-4053-8211-0C26FCA68A0F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0176389B-6A22-4053-8211-0C26FCA68A0F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0176389B-6A22-4053-8211-0C26FCA68A0F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0176389B-6A22-4053-8211-0C26FCA68A0F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5B41481C-77A5-46B5-A979-C9707752BA01}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5B41481C-77A5-46B5-A979-C9707752BA01}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5B41481C-77A5-46B5-A979-C9707752BA01}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5B41481C-77A5-46B5-A979-C9707752BA01}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
