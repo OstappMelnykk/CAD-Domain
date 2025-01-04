@@ -8,7 +8,7 @@ public class Simple3DPoint : IEquatable<Simple3DPoint>, ICloneable
     public double Y { get; }
     public double Z { get; }
     
-    protected Simple3DPoint(double x, double y, double z) {
+    public Simple3DPoint(double x, double y, double z) {
         X = x;
         Y = y;
         Z = z;
