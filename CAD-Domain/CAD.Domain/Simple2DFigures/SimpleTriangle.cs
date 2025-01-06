@@ -4,11 +4,11 @@ namespace CAD.Domain.Simple2DFigures;
 
 public class SimpleTriangle : ICloneable, IEquatable<SimpleTriangle>
 {
-    public Simple3DPoint Point1 { get; }
-    public Simple3DPoint Point2 { get; }
-    public Simple3DPoint Point3 { get; }
+    public SimplePoint Point1 { get; }
+    public SimplePoint Point2 { get; }
+    public SimplePoint Point3 { get; }
     
-    public SimpleTriangle(Simple3DPoint point1, Simple3DPoint point2, Simple3DPoint point3)
+    public SimpleTriangle(SimplePoint point1, SimplePoint point2, SimplePoint point3)
     {
         _ = point1 ?? throw new ArgumentNullException(nameof(point1));
         _ = point2 ?? throw new ArgumentNullException(nameof(point2));
@@ -22,7 +22,7 @@ public class SimpleTriangle : ICloneable, IEquatable<SimpleTriangle>
         Point3 = point3;
     }
     
-    private static bool IsValidTriangle(Simple3DPoint p1, Simple3DPoint p2, Simple3DPoint p3)
+    private static bool IsValidTriangle(SimplePoint p1, SimplePoint p2, SimplePoint p3)
     {
         double abX = p2.X - p1.X;
         double abY = p2.Y - p1.Y;
@@ -43,16 +43,16 @@ public class SimpleTriangle : ICloneable, IEquatable<SimpleTriangle>
     
     public SimpleTriangle()
     {
-        Point1 = new Simple3DPoint(Math.Cos(0), 0, Math.Sin(0));  
-        Point2 = new Simple3DPoint(Math.Cos(2 * Math.PI / 3), 0, Math.Sin(2 * Math.PI / 3));
-        Point3 = new Simple3DPoint(Math.Cos(4 * Math.PI / 3), 0, Math.Sin(4 * Math.PI / 3));
+        Point1 = new SimplePoint(Math.Cos(0), 0, Math.Sin(0));  
+        Point2 = new SimplePoint(Math.Cos(2 * Math.PI / 3), 0, Math.Sin(2 * Math.PI / 3));
+        Point3 = new SimplePoint(Math.Cos(4 * Math.PI / 3), 0, Math.Sin(4 * Math.PI / 3));
     }
 
     public object Clone()
     {
-        Simple3DPoint point1 = Point1.Clone() as Simple3DPoint;
-        Simple3DPoint point2 = Point2.Clone() as Simple3DPoint;
-        Simple3DPoint point3 = Point3.Clone() as Simple3DPoint;
+        SimplePoint point1 = Point1.Clone() as SimplePoint;
+        SimplePoint point2 = Point2.Clone() as SimplePoint;
+        SimplePoint point3 = Point3.Clone() as SimplePoint;
         
         return new SimpleTriangle(point1, point2, point3);
     }

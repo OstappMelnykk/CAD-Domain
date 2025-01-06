@@ -6,7 +6,7 @@ public class InvalidLineException : ApplicationException
 {
     private StringBuilder _message;
 
-    public InvalidLineException(Simple3DPoint point1, Simple3DPoint point2)
+    public InvalidLineException(SimplePoint point1, SimplePoint point2)
     {
         _message = new StringBuilder();
         

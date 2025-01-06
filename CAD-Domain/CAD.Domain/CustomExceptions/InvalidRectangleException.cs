@@ -6,7 +6,7 @@ public class InvalidRectangleException : ApplicationException
 {
     private StringBuilder _message;
     
-    public InvalidRectangleException(Simple3DPoint point1, Simple3DPoint point2, Simple3DPoint point3, Simple3DPoint point4)
+    public InvalidRectangleException(SimplePoint point1, SimplePoint point2, SimplePoint point3, SimplePoint point4)
     {
         _message = new StringBuilder();
         

@@ -1,6 +1,6 @@
 ﻿namespace CAD.Domain;
 
-public class Simple3DPoint : IEquatable<Simple3DPoint>, ICloneable
+public class SimplePoint : IEquatable<SimplePoint>, ICloneable
 {
     private const double EPSILON = 1e-10; // 0.0000000001
     
@@ -8,19 +8,19 @@ public class Simple3DPoint : IEquatable<Simple3DPoint>, ICloneable
     public double Y { get; }
     public double Z { get; }
     
-    public Simple3DPoint(double x, double y, double z) {
+    public SimplePoint(double x, double y, double z) {
         X = x;
         Y = y;
         Z = z;
     }
     
-    public Simple3DPoint() : this(0, 0, 0) {}
+    public SimplePoint() : this(0, 0, 0) {}
     
     public override string ToString() => $"({X}, {Y}, {Z})";
     public override int GetHashCode() => ToString().GetHashCode();
-    public object Clone() => new Simple3DPoint(X, Y, Z);
+    public object Clone() => new SimplePoint(X, Y, Z);
     
-    public bool Equals(Simple3DPoint? other)
+    public bool Equals(SimplePoint? other)
     {
         if (other is null) return false;
         if (ReferenceEquals(this, other)) return true;
@@ -31,9 +31,9 @@ public class Simple3DPoint : IEquatable<Simple3DPoint>, ICloneable
     }
 
     public override bool Equals(object? obj) =>
-        obj is Simple3DPoint other && Equals(other);
+        obj is SimplePoint other && Equals(other);
     
-    public static double GetDistanceBetweenPoints(Simple3DPoint p1, Simple3DPoint p2)
+    public static double GetDistanceBetweenPoints(SimplePoint p1, SimplePoint p2)
     {
         return Math.Sqrt(
             Math.Pow(p2.X - p1.X, 2) +

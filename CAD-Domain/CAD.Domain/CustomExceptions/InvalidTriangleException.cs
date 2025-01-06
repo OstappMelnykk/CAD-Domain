@@ -6,7 +6,7 @@ public class InvalidTriangleException : ApplicationException
 {
     private StringBuilder _message;
 
-    public InvalidTriangleException(Simple3DPoint point1, Simple3DPoint point2, Simple3DPoint point3)
+    public InvalidTriangleException(SimplePoint point1, SimplePoint point2, SimplePoint point3)
     {
         _message = new StringBuilder();
         

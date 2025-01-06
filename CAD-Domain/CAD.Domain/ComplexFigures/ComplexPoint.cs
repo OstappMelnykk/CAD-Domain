@@ -3,19 +3,19 @@ namespace CAD.Domain.ComplexFigures;
 
 public class ComplexPoint : ICloneable, IEquatable<ComplexPoint>
 {
-    public Simple3DPoint SimplePoint { get; }
+    public SimplePoint SimplePoint { get; }
     public uint GlobalId { get; set; }
     public List<byte> LocalIds { get; }
 
-    public ComplexPoint(Simple3DPoint simplePoint, uint globalId, List<byte>? localIds)
+    public ComplexPoint(SimplePoint simplePoint, uint globalId, List<byte>? localIds)
     {
         SimplePoint = simplePoint ?? throw new ArgumentNullException(nameof(simplePoint));
         GlobalId = globalId;
         LocalIds = localIds ?? new List<byte>();
     }
     
-    public ComplexPoint(Simple3DPoint simplePoint) : this(simplePoint, 0, null) { } 
-    public ComplexPoint() : this(new Simple3DPoint(), 0, null) { }
+    public ComplexPoint(SimplePoint simplePoint) : this(simplePoint, 0, null) { } 
+    public ComplexPoint() : this(new SimplePoint(), 0, null) { }
 
     
     public override string ToString()=> 
@@ -26,7 +26,7 @@ public class ComplexPoint : ICloneable, IEquatable<ComplexPoint>
     
     public object Clone()
     {
-        Simple3DPoint simplePoint = (Simple3DPoint) SimplePoint.Clone();
+        SimplePoint simplePoint = (SimplePoint) SimplePoint.Clone();
         uint globalId = GlobalId;
         List<byte> localIds = new List<byte>(LocalIds);
         
