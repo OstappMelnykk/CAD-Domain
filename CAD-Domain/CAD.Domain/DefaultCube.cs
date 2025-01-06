@@ -59,22 +59,19 @@ public static class DefaultCube
     
     public static List<ComplexPoint> GetDefaultCube8Points()
     {
-        return DefaultCube8Points
-            .Select(point => (ComplexPoint)point.Clone())
-            .ToList();
+        List<ComplexPoint> deepCopiedList = DefaultCube8Points.DeepClone();
+        return DefaultCube8Points.DeepClone();
     }
 
     public static List<ComplexPoint> GetDefaultCube12MiddlePoints()
     {
-        return DefaultCube12MiddlePoints
-            .Select(point => (ComplexPoint)point.Clone())
-            .ToList();
+        List<ComplexPoint> deepCopiedList = DefaultCube12MiddlePoints.DeepClone();
+        return deepCopiedList;
     }
 
     public static List<ComplexPoint> GetDefaultCube20Points()
     {
-        return DefaultCube20Points
-            .Select(point => (ComplexPoint)point.Clone())
-            .ToList();
+        List<ComplexPoint> deepCopiedList = DefaultCube20Points.DeepClone();
+        return deepCopiedList;
     }
 }
