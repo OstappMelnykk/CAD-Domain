@@ -41,4 +41,16 @@ public class SimplePoint : IEquatable<SimplePoint>, ICloneable
             Math.Pow(p2.Z - p1.Z, 2)
         );
     }
+
+    public static SimplePoint GetMidPointBetweenPoints(SimplePoint p1, SimplePoint p2)
+    {
+        _ = p1 ?? throw new ArgumentNullException(nameof(p1));
+        _ = p2 ?? throw new ArgumentNullException(nameof(p2));
+        
+        double midX = (p1.X + p2.X) / 2.0;
+        double midY = (p1.Y + p2.Y) / 2.0;
+        double midZ = (p1.Z + p2.Z) / 2.0;
+
+        return new SimplePoint(midX, midY, midZ);
+    }
 }
