@@ -43,4 +43,16 @@ public class ComplexPoint : ICloneable, IEquatable<ComplexPoint>
     
     public override bool Equals(object? obj) =>
         obj is ComplexPoint other && Equals(other);
+    
+    
+    
+    public static explicit operator SimplePoint(ComplexPoint complexPoint)
+    {
+        if (complexPoint == null)
+        {
+            throw new ArgumentNullException(nameof(complexPoint), "ComplexPoint cannot be null.");
+        }
+
+        return complexPoint.SimplePoint;
+    }
 }
