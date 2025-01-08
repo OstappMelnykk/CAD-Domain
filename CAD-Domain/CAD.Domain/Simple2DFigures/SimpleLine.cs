@@ -10,14 +10,12 @@ public class SimpleLine : IEquatable<SimpleLine>, ICloneable
 
     public SimpleLine(SimplePoint point1, SimplePoint point2)
     {
-        _ = point1 ?? throw new ArgumentNullException(nameof(point1));
-        _ = point2 ?? throw new ArgumentNullException(nameof(point2));
+        Point1 = point1 ?? throw new ArgumentNullException(nameof(point1));
+        Point2 = point2 ?? throw new ArgumentNullException(nameof(point2));
 
-        if (point1.Equals(point2))
-            throw new InvalidLineException(point1, point2);
+        if (Point1.Equals(Point2))
+            throw new InvalidLineException(Point1, Point2);
         
-        Point1 = point1; 
-        Point2 = point2;
     }
     
     public SimpleLine() : this (new SimplePoint(-1, 0, 0), new SimplePoint(1, 0, 0)) {}

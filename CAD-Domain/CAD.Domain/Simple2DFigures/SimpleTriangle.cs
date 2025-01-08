@@ -10,16 +10,13 @@ public class SimpleTriangle : ICloneable, IEquatable<SimpleTriangle>
     
     public SimpleTriangle(SimplePoint point1, SimplePoint point2, SimplePoint point3)
     {
-        _ = point1 ?? throw new ArgumentNullException(nameof(point1));
-        _ = point2 ?? throw new ArgumentNullException(nameof(point2));
-        _ = point3 ?? throw new ArgumentNullException(nameof(point3));
+        Point1 = point1 ?? throw new ArgumentNullException(nameof(point1));
+        Point2 = point2 ?? throw new ArgumentNullException(nameof(point2));
+        Point3 = point3 ?? throw new ArgumentNullException(nameof(point3));
         
-        if (!IsValidTriangle(point1, point2, point3))
-            throw new InvalidTriangleException(point1, point2, point3);
+        if (!IsValidTriangle(Point1, Point2, Point3))
+            throw new InvalidTriangleException(Point1, Point2, Point3);
 
-        Point1 = point1;
-        Point2 = point2;
-        Point3 = point3;
     }
     
     private static bool IsValidTriangle(SimplePoint p1, SimplePoint p2, SimplePoint p3)

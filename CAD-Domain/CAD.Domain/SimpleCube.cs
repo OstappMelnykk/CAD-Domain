@@ -16,7 +16,7 @@ public class SimpleCube : ICloneable, IEquatable<SimpleCube>
         SortingService.GlobalSorting(ComplexPoints);
     }
 
-    public SimpleCube() : this(DefaultCube.GetDefaultCube8Points()) {}
+    public SimpleCube() : this(DefaultCube.GetComplexCubePoints(8)) {}
     
     public object Clone()
     { 

@@ -14,18 +14,14 @@ public class SimpleRectangle : ICloneable, IEquatable<SimpleRectangle>
 
     public SimpleRectangle(SimplePoint point1, SimplePoint point2, SimplePoint point3, SimplePoint point4)
     {
-        _ = point1 ?? throw new ArgumentNullException(nameof(point1));
-        _ = point2 ?? throw new ArgumentNullException(nameof(point2));
-        _ = point3 ?? throw new ArgumentNullException(nameof(point3));
-        _ = point4 ?? throw new ArgumentNullException(nameof(point4));
+        Point1 = point1 ?? throw new ArgumentNullException(nameof(point1));
+        Point2 = point2 ?? throw new ArgumentNullException(nameof(point2));
+        Point3 = point3 ?? throw new ArgumentNullException(nameof(point3));
+        Point4 = point4 ?? throw new ArgumentNullException(nameof(point4));
         
         if (!IsValidRectangle(Point1, Point2, Point3, Point4))
             throw new InvalidRectangleException(Point1, Point2, Point3, Point4);
         
-        Point1 = point1;
-        Point2 = point2;
-        Point3 = point3;
-        Point4 = point4;
     }
     
     public SimpleRectangle()
