@@ -50,6 +50,7 @@ public static class CubeDivisionService
                 new ComplexPoint(new SimplePoint(newXPoints[i + 1], minCubePoint.Y, minCubePoint.Z)),
                 new ComplexPoint(new SimplePoint(newXPoints[i],     minCubePoint.Y, maxCubePoint.Z)),
                 new ComplexPoint(new SimplePoint(newXPoints[i + 1], minCubePoint.Y, maxCubePoint.Z)),
+                
                 new ComplexPoint(new SimplePoint(newXPoints[i],     maxCubePoint.Y, minCubePoint.Z)),
                 new ComplexPoint(new SimplePoint(newXPoints[i + 1], maxCubePoint.Y, minCubePoint.Z)),
                 new ComplexPoint(new SimplePoint(newXPoints[i],     maxCubePoint.Y, maxCubePoint.Z)),
@@ -106,20 +107,19 @@ public static class CubeDivisionService
             List<ComplexPoint> simpleCubeComplexPoints = new List<ComplexPoint>
             {
                 new ComplexPoint(new SimplePoint(minCubePoint.X, minCubePoint.Y, newZPoints[i])),
-                new ComplexPoint(new SimplePoint(minCubePoint.X, minCubePoint.Y, newZPoints[i])),
+                new ComplexPoint(new SimplePoint(maxCubePoint.X, minCubePoint.Y, newZPoints[i])),
                 new ComplexPoint(new SimplePoint(minCubePoint.X, minCubePoint.Y, newZPoints[i + 1])),
-                new ComplexPoint(new SimplePoint(minCubePoint.X, minCubePoint.Y, newZPoints[i + 1])),
-                new ComplexPoint(new SimplePoint(minCubePoint.X, minCubePoint.Y, newZPoints[i])),
-                new ComplexPoint(new SimplePoint(minCubePoint.X, minCubePoint.Y, newZPoints[i])),
-                new ComplexPoint(new SimplePoint(minCubePoint.X, minCubePoint.Y, newZPoints[i + 1])),
-                new ComplexPoint(new SimplePoint(minCubePoint.X, minCubePoint.Y, newZPoints[i + 1])),
+                new ComplexPoint(new SimplePoint(maxCubePoint.X, minCubePoint.Y, newZPoints[i + 1])),
+                new ComplexPoint(new SimplePoint(minCubePoint.X, maxCubePoint.Y, newZPoints[i])),
+                new ComplexPoint(new SimplePoint(maxCubePoint.X, maxCubePoint.Y, newZPoints[i])),
+                new ComplexPoint(new SimplePoint(minCubePoint.X, maxCubePoint.Y, newZPoints[i + 1])),
+                new ComplexPoint(new SimplePoint(maxCubePoint.X, maxCubePoint.Y, newZPoints[i + 1])),
             };
             
             newComplexCubes.Add(new ComplexCube(new SimpleCube(simpleCubeComplexPoints)));
         }
         return newComplexCubes;
     }
-    
     
     
     public static List<ComplexPoint> DivideCubeByAxes(int dx, int dy, int dz)
@@ -145,14 +145,9 @@ public static class CubeDivisionService
                 }
             }
         }
-        
+
         DistinctComplexPoints = ComplexPoints.DistinctAndMergeLocalIds();
-        SortingService.GlobalSorting(ComplexPoints);
-        
-        for (int i = 0; i < DistinctComplexPoints.Count; i++)
-        {
-            DistinctComplexPoints[i].GlobalId = (uint)(i + 1);
-        }
+        SortingService.GlobalSorting(DistinctComplexPoints);
         
         return DistinctComplexPoints;
     }
