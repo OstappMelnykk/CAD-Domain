@@ -7,8 +7,8 @@ public class ComplexCube : IEquatable<ComplexCube>
 {
     public List<ComplexPoint> ComplexPoints { get; } // SimpleCube verteces points + MiddlePoint of each edge of SimpleCube
     
-    public SimplePoint _minCubePoint { get; }
-    public SimplePoint _maxCubePoint { get; }
+    public SimplePoint MinCubePoint { get; }
+    public SimplePoint MaxCubePoint { get; }
 
     public ComplexCube(SimpleCube simpleCube, List<ComplexPoint> complexMiddlePoints = null)
     {
@@ -29,8 +29,8 @@ public class ComplexCube : IEquatable<ComplexCube>
         
         SortingService.GlobalSorting(ComplexPoints);
 
-        _minCubePoint = ComplexPoints[0].SimplePoint;
-        _maxCubePoint = ComplexPoints[^1].SimplePoint;
+        MinCubePoint = ComplexPoints[0].SimplePoint;
+        MaxCubePoint = ComplexPoints[^1].SimplePoint;
         
         SetLocalIds();
     }
