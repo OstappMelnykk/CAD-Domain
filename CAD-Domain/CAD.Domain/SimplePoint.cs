@@ -9,9 +9,10 @@ public class SimplePoint : IEquatable<SimplePoint>, ICloneable
     public double Z { get; }
     
     public SimplePoint(double x, double y, double z) {
-        X = x;
-        Y = y;
-        Z = z;
+        
+        X = Math.Round(x, 3);
+        Y = Math.Round(y, 3); 
+        Z = Math.Round(z, 3);
     }
     
     public SimplePoint() : this(0, 0, 0) {}
