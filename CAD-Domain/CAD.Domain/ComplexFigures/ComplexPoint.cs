@@ -1,4 +1,6 @@
 ﻿
+using System.Text.Json;
+
 namespace CAD.Domain.ComplexFigures;
 
 public class ComplexPoint : ICloneable, IEquatable<ComplexPoint>
@@ -54,5 +56,12 @@ public class ComplexPoint : ICloneable, IEquatable<ComplexPoint>
         }
 
         return complexPoint.SimplePoint;
+    }
+    
+    
+    
+    public string GetJsonSerializedCube()
+    {
+        return JsonSerializer.Serialize(this, new JsonSerializerOptions { WriteIndented = true });
     }
 }

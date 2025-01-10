@@ -1,4 +1,6 @@
-﻿namespace CAD.Domain;
+﻿using System.Text.Json;
+
+namespace CAD.Domain;
 
 public class SimplePoint : IEquatable<SimplePoint>, ICloneable
 {
@@ -53,5 +55,10 @@ public class SimplePoint : IEquatable<SimplePoint>, ICloneable
         double midZ = (p1.Z + p2.Z) / 2.0;
 
         return new SimplePoint(midX, midY, midZ);
+    }
+    
+    public string GetJsonSerializedCube()
+    {
+        return JsonSerializer.Serialize(this, new JsonSerializerOptions { WriteIndented = true });
     }
 }

@@ -1,4 +1,5 @@
-﻿using CAD.Domain.CustomExceptions;
+﻿using System.Text.Json;
+using CAD.Domain.CustomExceptions;
 
 namespace CAD.Domain.Simple2DFigures;
 
@@ -57,5 +58,10 @@ public class SimpleTriangle : ICloneable, IEquatable<SimpleTriangle>
     public bool Equals(SimpleTriangle? other)
     {
         throw new NotImplementedException();
+    }
+    
+    public string GetJsonSerializedCube()
+    {
+        return JsonSerializer.Serialize(this, new JsonSerializerOptions { WriteIndented = true });
     }
 }

@@ -1,4 +1,5 @@
-﻿using CAD.Domain.ComplexFigures;
+﻿using System.Text.Json;
+using CAD.Domain.ComplexFigures;
 using CAD.Domain.SimpleServices;
 
 namespace CAD.Domain;
@@ -37,4 +38,9 @@ public class SimpleCube : ICloneable, IEquatable<SimpleCube>
 
     public override string ToString() => $"Points: \n\t{{{string.Join("\n\t", ComplexPoints)}}}";
     public override int GetHashCode() => ToString().GetHashCode();
+    
+    public string GetJsonSerializedCube()
+    {
+        return JsonSerializer.Serialize(this, new JsonSerializerOptions { WriteIndented = true });
+    }
 }

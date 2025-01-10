@@ -1,4 +1,5 @@
-﻿using CAD.Domain.SimpleServices;
+﻿using System.Text.Json;
+using CAD.Domain.SimpleServices;
 
 namespace CAD.Domain.ComplexFigures;
 
@@ -48,4 +49,9 @@ public class SuperCube : IEquatable<SuperCube>
     
     public override int GetHashCode() => ToString().GetHashCode();
     
+    
+    public string GetJsonSerializedCube()
+    {
+        return JsonSerializer.Serialize(this, new JsonSerializerOptions { WriteIndented = true });
+    }
 }

@@ -1,4 +1,5 @@
 ﻿using System.Drawing;
+using System.Text.Json;
 using CAD.Domain.CustomExceptions;
 
 namespace CAD.Domain.Simple2DFigures;
@@ -44,4 +45,10 @@ public class SimpleLine : IEquatable<SimpleLine>, ICloneable
     
     public override string ToString() => $"Line:\n  {Point1},\n  {Point2}";
     public override int GetHashCode() => ToString().GetHashCode();
+    
+    
+    public string GetJsonSerializedCube()
+    {
+        return JsonSerializer.Serialize(this, new JsonSerializerOptions { WriteIndented = true });
+    }
 }

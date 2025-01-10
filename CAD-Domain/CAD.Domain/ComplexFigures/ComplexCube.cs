@@ -1,4 +1,5 @@
 ﻿using System.Text;
+using System.Text.Json;
 using CAD.Domain.SimpleServices;
 
 namespace CAD.Domain.ComplexFigures;
@@ -66,4 +67,11 @@ public class ComplexCube : IEquatable<ComplexCube>
         obj is ComplexCube other && Equals(other);
     
     public override int GetHashCode() => ToString().GetHashCode();
+    
+    
+    
+    public string GetJsonSerializedCube()
+    {
+        return JsonSerializer.Serialize(this, new JsonSerializerOptions { WriteIndented = true });
+    }
 }

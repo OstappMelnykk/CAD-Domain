@@ -1,4 +1,5 @@
 ﻿using System.Drawing;
+using System.Text.Json;
 using CAD.Domain.CustomExceptions;
 
 namespace CAD.Domain.Simple2DFigures;
@@ -118,4 +119,11 @@ public class SimpleRectangle : ICloneable, IEquatable<SimpleRectangle>
 
     private static double DotProduct(SimplePoint p1, SimplePoint p2) => 
         p1.X * p2.X + p1.Y * p2.Y + p1.Z * p2.Z;
+    
+    
+    
+    public string GetJsonSerializedCube()
+    {
+        return JsonSerializer.Serialize(this, new JsonSerializerOptions { WriteIndented = true });
+    }
 }
