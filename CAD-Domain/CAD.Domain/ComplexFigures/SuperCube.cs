@@ -7,21 +7,15 @@ namespace CAD.Domain.ComplexFigures;
 public class SuperCube : IEquatable<SuperCube>
 {
     public List<ComplexPoint> ComplexPoints { get; private set; }
-
     public Dictionary<string, List<uint>> Face_PointsList { get; private set; }
-
-    public List<(int, int)> PairsToConnect_asListIndices { get; private set; }
     
-    public List<(SimplePoint, SimplePoint)> PairsToConnect_asSimplePoints { get; private set; }
-    
-    
-
-    
-    public SimplePoint MinCubePoint { get; private set; }
-    public SimplePoint MaxCubePoint { get; private set; } 
+    public int Dx { get; set; }
+    public int Dy { get; set; }
+    public int Dz { get; set; }
 
     public SuperCube(int dx, int dy, int dz)
     {
+        ComplexPoints = new();
         Face_PointsList = new Dictionary<string, List<uint>>
         {
             { "NegativeFacePoints_X", new List<uint>() },
@@ -40,18 +34,16 @@ public class SuperCube : IEquatable<SuperCube>
 
     public void DivideCubeByAxes(int dx, int dy, int dz)
     {
-        ComplexPoints = CubeDivisionService.DivideCubeByAxes(dx, dy, dz);
+        Dx = dx;
+        Dy = dy;
+        Dz = dz;
+        
+        ComplexPoints.Clear();
+        ComplexPoints.AddRange(CubeDivisionService.DivideCubeByAxes(dx, dy, dz));
+        //ComplexPoints = CubeDivisionService.DivideCubeByAxes(dx, dy, dz);
         
         SetGlobalIds();
-        
-        MinCubePoint = ComplexPoints[0].SimplePoint;
-        MaxCubePoint = ComplexPoints[^1].SimplePoint;
-
         ConfigurePointsOnFaces();
-        
-        (PairsToConnect_asListIndices, PairsToConnect_asSimplePoints) = GetPairsToConnect(dx, dy, dz);
-        
-        
     }
 
     public List<SimplePoint> GetSimplePoints()
@@ -66,6 +58,30 @@ public class SuperCube : IEquatable<SuperCube>
             ComplexPoints[i].GlobalId = (uint)(i + 1);
         }
     }
+    
+    public void ConfigurePointsOnFaces()
+    {
+        foreach (var key in Face_PointsList.Keys.ToList())
+        {
+            Face_PointsList[key].Clear();
+        }
+        
+        SimplePoint minCubePoint = ComplexPoints[0].SimplePoint;
+        SimplePoint maxCubePoint = ComplexPoints[^1].SimplePoint;
+        
+        foreach (var point in ComplexPoints)
+        {
+            if (point.SimplePoint.X == minCubePoint.X) Face_PointsList["NegativeFacePoints_X"].Add(point.GlobalId);
+            if (point.SimplePoint.X == maxCubePoint.X) Face_PointsList["PositiveFacePoints_X"].Add(point.GlobalId);
+            
+            if (point.SimplePoint.Y == minCubePoint.Y) Face_PointsList["NegativeFacePoints_Y"].Add(point.GlobalId);
+            if (point.SimplePoint.Y == maxCubePoint.Y) Face_PointsList["PositiveFacePoints_Y"].Add(point.GlobalId);
+            
+            if (point.SimplePoint.Z == minCubePoint.Z) Face_PointsList["NegativeFacePoints_Z"].Add(point.GlobalId);
+            if (point.SimplePoint.Z == maxCubePoint.Z) Face_PointsList["PositiveFacePoints_Z"].Add(point.GlobalId);
+        }
+    }
+    
     
     public override string ToString() => $"Points: \n\t{{{string.Join("\n\t", ComplexPoints)}}}";
     
@@ -87,10 +103,42 @@ public class SuperCube : IEquatable<SuperCube>
     {
         return JsonSerializer.Serialize(this, new JsonSerializerOptions { WriteIndented = true });
     }
+}
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*public List<(int, int)> PairsToConnect_asListIndices { get; private set; }
+
+public List<(SimplePoint, SimplePoint)> PairsToConnect_asSimplePoints { get; private set; }*/
+    
+    
+    
+/*public SimplePoint MinCubePoint { get; private set; }
+public SimplePoint MaxCubePoint { get; private set; }
+*/
+
+/*
     private (List<(int, int)>, List<(SimplePoint, SimplePoint)>) GetPairsToConnect(int dx, int dy, int dz)
     {
+        /*
+        List<(int, int)> pairsOfIndicesToConect = DrawingService.GetIndicesToConnect(dx, dy, dz);
+        List<(SimplePoint, SimplePoint)> pairsOfSimplePointsToConect = DrawingService.GetSimplePointsToConnect(ComplexPoints, pairsOfIndicesToConect);
+        #1#
+        
+        
+        
         List<(int, int)> X_AxisParallelPairs = Get_X_AxisParallelPairs(dx, dy, dz);
         List<(int, int)> Y_AxisParallelPairs = Get_Y_AxisParallelPairs(dx, dy, dz);
         List<(int, int)> Z_AxisParallelPairs = Get_Z_AxisParallelPairs(dx, dy, dz);
@@ -114,7 +162,7 @@ public class SuperCube : IEquatable<SuperCube>
         List<(int, int)> pairs = new List<(int, int)>();
         
         int stepFor_X = 3 * dx + 2;
-        int stepFor_y = Face_PointsList["NegativeFacePoints_X"].Count + (dx + 1) * (dz + 1);
+        int stepFor_y = Face_PointsList["NegativeFacePoints_Y"].Count + (dx + 1) * (dz + 1);
 
         for (int i = 0; i < dy + 1; i++)
         {
@@ -192,20 +240,4 @@ public class SuperCube : IEquatable<SuperCube>
         }
         return pairs;
     }
-    
-
-    public void ConfigurePointsOnFaces()
-    {
-        foreach (var point in ComplexPoints)
-        {
-            if (point.SimplePoint.X == MinCubePoint.X) Face_PointsList["NegativeFacePoints_X"].Add(point.GlobalId);
-            if (point.SimplePoint.X == MaxCubePoint.X) Face_PointsList["PositiveFacePoints_X"].Add(point.GlobalId);
-            
-            if (point.SimplePoint.Y == MinCubePoint.Y) Face_PointsList["NegativeFacePoints_Y"].Add(point.GlobalId);
-            if (point.SimplePoint.Y == MaxCubePoint.Y) Face_PointsList["PositiveFacePoints_Y"].Add(point.GlobalId);
-            
-            if (point.SimplePoint.Z == MinCubePoint.Z) Face_PointsList["NegativeFacePoints_Z"].Add(point.GlobalId);
-            if (point.SimplePoint.Z == MaxCubePoint.Z) Face_PointsList["PositiveFacePoints_Z"].Add(point.GlobalId);
-        }
-    }
-}
+    */
