@@ -7,7 +7,7 @@ namespace CAD.Domain.ComplexFigures;
 public class SuperCube : IEquatable<SuperCube>
 {
     public List<ComplexPoint> ComplexPoints { get; private set; }
-    public Dictionary<string, List<uint>> Face_PointsList { get; private set; }
+    public Dictionary<string, List<int>> Face_PointsList { get; private set; }
     
     public int Dx { get; set; }
     public int Dy { get; set; }
@@ -16,14 +16,14 @@ public class SuperCube : IEquatable<SuperCube>
     public SuperCube(int dx, int dy, int dz)
     {
         ComplexPoints = new();
-        Face_PointsList = new Dictionary<string, List<uint>>
+        Face_PointsList = new Dictionary<string, List<int>>
         {
-            { "NegativeFacePoints_X", new List<uint>() },
-            { "NegativeFacePoints_Y", new List<uint>() },
-            { "NegativeFacePoints_Z", new List<uint>() },
-            { "PositiveFacePoints_X", new List<uint>() },
-            { "PositiveFacePoints_Y", new List<uint>() },
-            { "PositiveFacePoints_Z", new List<uint>() },
+            { "NegativeFacePoints_X", new List<int>() },
+            { "NegativeFacePoints_Y", new List<int>() },
+            { "NegativeFacePoints_Z", new List<int>() },
+            { "PositiveFacePoints_X", new List<int>() },
+            { "PositiveFacePoints_Y", new List<int>() },
+            { "PositiveFacePoints_Z", new List<int>() },
         };
         
         DivideCubeByAxes(dx, dy, dz);
@@ -71,14 +71,14 @@ public class SuperCube : IEquatable<SuperCube>
         
         foreach (var point in ComplexPoints)
         {
-            if (point.SimplePoint.X == minCubePoint.X) Face_PointsList["NegativeFacePoints_X"].Add(point.GlobalId);
-            if (point.SimplePoint.X == maxCubePoint.X) Face_PointsList["PositiveFacePoints_X"].Add(point.GlobalId);
+            if (point.SimplePoint.X == minCubePoint.X) Face_PointsList["NegativeFacePoints_X"].Add((int)point.GlobalId - 1);
+            if (point.SimplePoint.X == maxCubePoint.X) Face_PointsList["PositiveFacePoints_X"].Add((int)point.GlobalId - 1);
             
-            if (point.SimplePoint.Y == minCubePoint.Y) Face_PointsList["NegativeFacePoints_Y"].Add(point.GlobalId);
-            if (point.SimplePoint.Y == maxCubePoint.Y) Face_PointsList["PositiveFacePoints_Y"].Add(point.GlobalId);
+            if (point.SimplePoint.Y == minCubePoint.Y) Face_PointsList["NegativeFacePoints_Y"].Add((int)point.GlobalId - 1);
+            if (point.SimplePoint.Y == maxCubePoint.Y) Face_PointsList["PositiveFacePoints_Y"].Add((int)point.GlobalId - 1);
             
-            if (point.SimplePoint.Z == minCubePoint.Z) Face_PointsList["NegativeFacePoints_Z"].Add(point.GlobalId);
-            if (point.SimplePoint.Z == maxCubePoint.Z) Face_PointsList["PositiveFacePoints_Z"].Add(point.GlobalId);
+            if (point.SimplePoint.Z == minCubePoint.Z) Face_PointsList["NegativeFacePoints_Z"].Add((int)point.GlobalId - 1);
+            if (point.SimplePoint.Z == maxCubePoint.Z) Face_PointsList["PositiveFacePoints_Z"].Add((int)point.GlobalId - 1);
         }
     }
     
