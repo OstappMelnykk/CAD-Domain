@@ -6,22 +6,22 @@ namespace CAD.Domain.ComplexFigures;
 public class SuperCubeService
 { 
     private SuperCube _superCube;
-    
+
     public List<(int, int)> PairsToConnect_asListIndices { get; init; }
     public List<(SimplePoint, SimplePoint)> PairsToConnect_asSimplePoints { get; init; }
     
-    public List<(int, int, int)> Poligons_asListIndices { get; init; }
-    public List<(SimplePoint, SimplePoint, SimplePoint)> Poligons_asSimplePoints { get; init; }
-    public List<SimpleTriangle> Poligons_asSimpleTriangles { get; init; }
+    public List<(int, int, int)> Polygons_asListIndices { get; init; }
+    public List<(SimplePoint, SimplePoint, SimplePoint)> Polygons_asSimplePoints { get; init; }
+    public List<SimpleTriangle> Polygons_asSimpleTriangles { get; init; }
 
     public SuperCubeService(SuperCube superCube)
     {
         PairsToConnect_asListIndices = new();
         PairsToConnect_asSimplePoints = new();
         
-        Poligons_asListIndices = new();
-        Poligons_asSimplePoints = new();
-        Poligons_asSimpleTriangles = new();     
+        Polygons_asListIndices = new();
+        Polygons_asSimplePoints = new();
+        Polygons_asSimpleTriangles = new();     
         
         _superCube = superCube;
     }
@@ -35,7 +35,7 @@ public class SuperCubeService
         Get_pairsToConnect_asListIndices();
         Get_pairsToConnect_asSimplePoints(PairsToConnect_asListIndices);
         
-        Get_Poligons_asListIndices();
+        Get_Polygons_asListIndices();
 
     }
 
@@ -179,7 +179,7 @@ public class SuperCubeService
     
     
     
-    private List<(int, int, int)> GetPoligons(int d_Axis, List<int> Face_PointsList_Axis)
+    private List<(int, int, int)> GetPolygons(int d_Axis, List<int> Face_PointsList_Axis)
     {
         List<List<int>> ordinary = new List<List<int>>();
         List<List<int>> middle = new List<List<int>>();
@@ -228,92 +228,39 @@ public class SuperCubeService
 
 
 
-    private void Get_Poligons_asListIndices()
+    private void Get_Polygons_asListIndices()
     {
         Dictionary<string, List<int>> Face_PointsList = _superCube.Face_PointsList;
         int dx = _superCube.Dx;
         int dy = _superCube.Dy;
         int dz = _superCube.Dz;
 
-        List<(int, int, int)> NegativeFace_X_Poligons = GetPoligons(dz, Face_PointsList["NegativeFacePoints_X"]);
-        List<(int, int, int)> PositiveFace_X_Poligons = GetPoligons(dz, Face_PointsList["PositiveFacePoints_X"]);
+        List<(int, int, int)> NegativeFace_X_Polygons = GetPolygons(dz, Face_PointsList["NegativeFacePoints_X"]);
+        List<(int, int, int)> PositiveFace_X_Polygons = GetPolygons(dz, Face_PointsList["PositiveFacePoints_X"]);
         
-        List<(int, int, int)> NegativeFace_Y_Poligons = GetPoligons(dx, Face_PointsList["NegativeFacePoints_Y"]);
-        List<(int, int, int)> PositiveFace_Y_Poligons = GetPoligons(dx, Face_PointsList["PositiveFacePoints_Y"]);
+        List<(int, int, int)> NegativeFace_Y_Polygons = GetPolygons(dx, Face_PointsList["NegativeFacePoints_Y"]);
+        List<(int, int, int)> PositiveFace_Y_Polygons = GetPolygons(dx, Face_PointsList["PositiveFacePoints_Y"]);
         
-        List<(int, int, int)> NegativeFace_Z_Poligons = GetPoligons(dx, Face_PointsList["NegativeFacePoints_Z"]);
-        List<(int, int, int)> PositiveFace_Z_Poligons = GetPoligons(dx, Face_PointsList["PositiveFacePoints_Z"]);
+        List<(int, int, int)> NegativeFace_Z_Polygons = GetPolygons(dx, Face_PointsList["NegativeFacePoints_Z"]);
+        List<(int, int, int)> PositiveFace_Z_Polygons = GetPolygons(dx, Face_PointsList["PositiveFacePoints_Z"]);
 
         
-        Poligons_asListIndices.Clear();
+        Polygons_asListIndices.Clear();
         
-        Poligons_asListIndices.AddRange(NegativeFace_X_Poligons);
-        Poligons_asListIndices.AddRange(PositiveFace_X_Poligons);
-        Poligons_asListIndices.AddRange(NegativeFace_Y_Poligons);
-        Poligons_asListIndices.AddRange(PositiveFace_Y_Poligons);
-        Poligons_asListIndices.AddRange(NegativeFace_Z_Poligons);
-        Poligons_asListIndices.AddRange(PositiveFace_Z_Poligons);
+        Polygons_asListIndices.AddRange(NegativeFace_X_Polygons);
+        Polygons_asListIndices.AddRange(PositiveFace_X_Polygons);
+        Polygons_asListIndices.AddRange(NegativeFace_Y_Polygons);
+        Polygons_asListIndices.AddRange(PositiveFace_Y_Polygons);
+        Polygons_asListIndices.AddRange(NegativeFace_Z_Polygons);
+        Polygons_asListIndices.AddRange(PositiveFace_Z_Polygons);
     }
     
     
-    /*
-    private List<(int, int, int)> GetNegativeFace_X_Poligons()
+    
+
+    private void Get_Polygons_asSimplePoints()
     {
-        int dz = _superCube.Dz;
-        var Face_PointsList = _superCube.Face_PointsList;
-
-        return GetPoligons(dz, Face_PointsList["NegativeFacePoints_X"]);
-    }
-    private List<(int, int, int)> GetPositiveFace_X_Poligons()
-    {
-        int dz = _superCube.Dz;
-        var Face_PointsList = _superCube.Face_PointsList;
-
-        return GetPoligons(dz, Face_PointsList["PositiveFacePoints_X"]);
-    }
-
-    private List<(int, int, int)> GetNegativeFace_Y_Poligons()
-    {
-        int dx = _superCube.Dx;
-        var Face_PointsList = _superCube.Face_PointsList;
-
-        return GetPoligons(dx, Face_PointsList["NegativeFacePoints_Z"]);
-    }
-    private List<(int, int, int)> GetPositiveFace_Y_Poligons()
-    {
-        
-        int dx = _superCube.Dx;
-        var Face_PointsList = _superCube.Face_PointsList;
-
-        return GetPoligons(dx, Face_PointsList["PositiveFacePoints_Z"]);
-    }
-    
-    private List<(int, int, int)> GetNegativeFace_Z_Poligons()
-    {
-        int dx = _superCube.Dx;
-        var Face_PointsList = _superCube.Face_PointsList;
-
-        return GetPoligons(dx, Face_PointsList["NegativeFacePoints_Y"]);
-    }
-    private List<(int, int, int)> GetPositiveFace_Z_Poligons()
-    {
-        int dx = _superCube.Dx;
-        var Face_PointsList = _superCube.Face_PointsList;
-
-        return GetPoligons(dx, Face_PointsList["PositiveFacePoints_Y"]);
-    }
-    */
-    
-    
-    
-    
-    
-    
-    
-
-    private void Get_Poligons_asSimplePoints()
-    {
-        List<(SimplePoint, SimplePoint, SimplePoint)> poligons_asSimplePoints = Poligons_asListIndices
+        List<(SimplePoint, SimplePoint, SimplePoint)> polygons_asSimplePoints = Polygons_asListIndices
                         .Select(touple => (
                                         _superCube.ComplexPoints[touple.Item1].SimplePoint,
                                         _superCube.ComplexPoints[touple.Item2].SimplePoint,
@@ -321,14 +268,14 @@ public class SuperCubeService
                                         ))
                         .ToList();
 
-        Poligons_asSimplePoints.Clear();
-        Poligons_asSimplePoints.AddRange(poligons_asSimplePoints);
+        Polygons_asSimplePoints.Clear();
+        Polygons_asSimplePoints.AddRange(polygons_asSimplePoints);
 
     }
 
-    private void Get_Poligons_asSimplePoints(List<(int, int, int)> poligons_asListIndices)
+    private void Get_Polygons_asSimplePoints(List<(int, int, int)> polygons_asListIndices)
     {
-        List<(SimplePoint, SimplePoint, SimplePoint)> poligons_asSimplePoints = poligons_asListIndices
+        List<(SimplePoint, SimplePoint, SimplePoint)> polygons_asSimplePoints = polygons_asListIndices
                         .Select(touple => (
                                         _superCube.ComplexPoints[touple.Item1].SimplePoint,
                                         _superCube.ComplexPoints[touple.Item2].SimplePoint,
@@ -336,40 +283,30 @@ public class SuperCubeService
                         ))
                         .ToList();
 
-        Poligons_asSimplePoints.Clear();
-        Poligons_asSimplePoints.AddRange(poligons_asSimplePoints);
+        Polygons_asSimplePoints.Clear();
+        Polygons_asSimplePoints.AddRange(polygons_asSimplePoints);
     }
+    
+    
 
 
-
-
-
-
-    private void Get_Poligons_asSimpleTriangles()
+    private void Get_Polygons_asSimpleTriangles()
     {
-        List<SimpleTriangle> poligons_asSimpleTriangles = Poligons_asSimplePoints
+        List<SimpleTriangle> polygons_asSimpleTriangles = Polygons_asSimplePoints
                         .Select(touple => new SimpleTriangle(touple.Item1, touple.Item2, touple.Item3))
                         .ToList();
 
-        Poligons_asSimpleTriangles.Clear();
-        Poligons_asSimpleTriangles.AddRange(poligons_asSimpleTriangles);
+        Polygons_asSimpleTriangles.Clear();
+        Polygons_asSimpleTriangles.AddRange(polygons_asSimpleTriangles);
     }
 
-    private void Get_Poligons_asSimpleTriangles(List<(SimplePoint, SimplePoint, SimplePoint)> poligons_asSimplePoints)
+    private void Get_Polygons_asSimpleTriangles(List<(SimplePoint, SimplePoint, SimplePoint)> polygons_asSimplePoints)
     {
-        List<SimpleTriangle> poligons_asSimpleTriangles = poligons_asSimplePoints
+        List<SimpleTriangle> polygons_asSimpleTriangles = polygons_asSimplePoints
                         .Select(touple => new SimpleTriangle(touple.Item1, touple.Item2, touple.Item3))
                         .ToList();
 
-        Poligons_asSimpleTriangles.Clear();
-        Poligons_asSimpleTriangles.AddRange(poligons_asSimpleTriangles);
+        Polygons_asSimpleTriangles.Clear();
+        Polygons_asSimpleTriangles.AddRange(polygons_asSimpleTriangles);
     }
-
-
-
-
-
-
-
-
 }
