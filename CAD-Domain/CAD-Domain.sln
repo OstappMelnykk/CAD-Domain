@@ -4,6 +4,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CAD.Domain", "CAD.Domain\CA
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CAD.ConsoleApplication", "CAD.ConsoleApplication\CAD.ConsoleApplication.csproj", "{5B41481C-77A5-46B5-A979-C9707752BA01}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CAD.MinimalAPI", "CAD.MinimalAPI\CAD.MinimalAPI.csproj", "{DE6BACA3-9268-4D93-B7EC-5B9A004B56AA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{5B41481C-77A5-46B5-A979-C9707752BA01}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5B41481C-77A5-46B5-A979-C9707752BA01}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5B41481C-77A5-46B5-A979-C9707752BA01}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DE6BACA3-9268-4D93-B7EC-5B9A004B56AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DE6BACA3-9268-4D93-B7EC-5B9A004B56AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DE6BACA3-9268-4D93-B7EC-5B9A004B56AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DE6BACA3-9268-4D93-B7EC-5B9A004B56AA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
